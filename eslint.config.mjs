@@ -9,7 +9,7 @@ export default tseslint.config({
     tseslint.configs.recommendedTypeChecked,
     
   ],
-  ignores: ['dist', 'node_modules'],
+  ignores: ['dist', 'node_modules', '.prettierrc'],
   files: ['**/*.ts'],
   languageOptions: {
     parserOptions: {
