@@ -13,7 +13,9 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^17.2.1",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "latest": "^0.2.0",
+    "nvm": "^0.0.4"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
