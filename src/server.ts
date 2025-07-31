@@ -18,7 +18,7 @@ const startServer = async () => {
         if (error instanceof Error) {
             logger.error(error.message)
         } else {
-            logger.error('AN unknown error occured')
+            logger.error('AN unpppppknown error occured')
         }
 
         setTimeout(() => {
