@@ -63,7 +63,43 @@ export const deleteProductById = async (
         }
         return res
             .status(201)
-            .json({ message: `product with this id ${id} has been deleted.` })
+            .json({ message: `product with this id ${id} has been` })
+    } catch (err) {
+        next(err)
+        return
+    }
+}
+
+export const updateProductById = async (
+    req: Request<{ id: string }, object, productData>,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
+        const id = Number(req.params.id)
+        if (isNaN(id)) {
+            res.status(400).json({ message: 'invalid product id' })
+        }
+        const { name, description } = req.body
+
+        const productRepository = AppDataSource.getRepository(Product)
+        const result = await productRepository.update(id, {
+            name,
+            description,
+        })
+
+        if (result.affected === 0) {
+            return res
+                .status(404)
+                .json({ message: `No product found with this id ${id}` })
+        }
+
+        const updatedProduct = await productRepository.findOneBy({ id })
+
+        return res.status(200).json({
+            message: `product with this id ${id} has been updated.`,
+            updatedProduct,
+        })
     } catch (err) {
         next(err)
         return
