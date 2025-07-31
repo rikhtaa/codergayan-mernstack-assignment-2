@@ -63,7 +63,7 @@ export const deleteProductById = async (
         }
         return res
             .status(201)
-            .json({ message: `product with this id ${id} has been` })
+            .json({ message: `product with this id ${id} has been deleted.` })
     } catch (err) {
         next(err)
         return
