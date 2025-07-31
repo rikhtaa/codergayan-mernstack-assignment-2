@@ -43,3 +43,29 @@ export const getProductById = async (
         return
     }
 }
+export const deleteProductById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
+        const id = Number(req.params.id)
+        if (isNaN(id)) {
+            res.status(400).json({ message: 'invalid product id' })
+        }
+        const productRepository = AppDataSource.getRepository(Product)
+        const product = await productRepository.delete({ id })
+
+        if (!product) {
+            return res
+                .status(401)
+                .json({ message: `No product found with this id ${id}` })
+        }
+        return res
+            .status(201)
+            .json({ message: `product with this id ${id} has been deleted.` })
+    } catch (err) {
+        next(err)
+        return
+    }
+}
