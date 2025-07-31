@@ -105,3 +105,18 @@ export const updateProductById = async (
         return
     }
 }
+
+export const getAllProducts = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+) => {
+    try {
+        const productRepository = AppDataSource.getRepository(Product)
+        const allProducts = await productRepository.find()
+        return res.status(200).json({ message: 'All products', allProducts })
+    } catch (err) {
+        next(err)
+        return
+    }
+}
