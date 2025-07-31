@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": " ts-node src/server.ts",
+        "dev": "nodemon --exec ts-node src/server.ts",
         "lint": "eslint .",
         "lint:check": "eslint .",
         "lint:fix": "eslint . --fix",
@@ -45,6 +45,7 @@
         "http-errors": "^2.0.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.2",
+        "nodemon": "^3.1.10",
         "prettier": "^3.6.2",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3",
