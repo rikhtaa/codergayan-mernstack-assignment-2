@@ -12,7 +12,7 @@ const startServer = async () => {
         await AppDataSource.initialize()
         logger.info('DB connected successfully')
         app.listen(port, () => {
-            logger.info('Server started successfully')
+            logger.info('Server started on 5501 successfully')
         })
     } catch (error: unknown) {
         if (error instanceof Error) {
