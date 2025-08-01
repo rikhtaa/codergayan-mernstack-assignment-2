@@ -21,24 +21,36 @@ describe("Item Routes", ()=>{
     describe('given all fields', () => {
         it("should retrun 201 statusCode", async()=>{
 
-                 await request(app).post('/product').send({ name: "codebite1", description: "ed tech1" });
-                    const itemData = {
-                   price: 400,
-                   productId: 1 
-                  }
-                  const response = await request(app).post('/item').send(itemData)
-                  expect(response.statusCode).toBe(201)
+        await request(app).post('/product').send({ name: "codebite1", description: "ed tech1" });
+        const itemData = {
+            price: 400,
+            productId: 1 
+            }
+        const response = await request(app).post('/item').send(itemData)
+        expect(response.statusCode).toBe(201)
         })
         it("should return return valid json", async()=>{
-                            const itemData = {
-                   price: 400,
-                   productId: 1 
-                  }
-                          const response = await request(app).post('/item').send(itemData)
+            const itemData = {
+                price: 400,
+                productId: 1 
+                }
+           const response = await request(app).post('/item').send(itemData)
                    
-                          expect((response.headers as Record<string, string>)['content-type'], 
+            expect((response.headers as Record<string, string>)['content-type'], 
                        ).toEqual(expect.stringContaining('json'))
         })
+         it('should return the id of the created item', async()=>{
+                const productResponse = await request(app).post('/product').send({ name: "codebite1", description: "ed tech1" });
+                    const productId = productResponse.body.id
+                     const itemData = {
+                    price: 400,
+                    productId, 
+                   }
+                   const response = await request(app).post('/item').send(itemData)
+                   expect(response.body.item).toHaveProperty('id')
+                     expect(response.statusCode).toBe(201);
+            
+                })
     })
 })
 })
