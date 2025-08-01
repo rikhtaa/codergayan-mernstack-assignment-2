@@ -9,7 +9,8 @@ export default tseslint.config({
     tseslint.configs.recommendedTypeChecked,
     
   ],
-  ignores: ['dist', 'node_modules', '.prettierrc', 'jest.config.js', 'coverage'],
+  ignores: ['dist', 'node_modules', '.prettierrc', 'jest.config.js',  'tests/',
+            'coverage/',],
   files: ['**/*.ts'],
   languageOptions: {
     parserOptions: {
