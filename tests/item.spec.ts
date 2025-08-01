@@ -28,7 +28,17 @@ describe("Item Routes", ()=>{
                   }
                   const response = await request(app).post('/item').send(itemData)
                   expect(response.statusCode).toBe(201)
-               })
+        })
+        it("should return return valid json", async()=>{
+                            const itemData = {
+                   price: 400,
+                   productId: 1 
+                  }
+                          const response = await request(app).post('/item').send(itemData)
+                   
+                          expect((response.headers as Record<string, string>)['content-type'], 
+                       ).toEqual(expect.stringContaining('json'))
+        })
     })
 })
 })
