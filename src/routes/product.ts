@@ -6,9 +6,10 @@ import {
     getProductById,
     updateProductById,
 } from '../controllers/Product'
+import productValidator from '../validator/create-product'
 export const productRouter = express()
 
-productRouter.post('/', createProduct)
+productRouter.post('/', productValidator, createProduct)
 productRouter.get('/:id', getProductById)
 productRouter.delete('/:id', deleteProductById)
 productRouter.patch('/:id', updateProductById)
