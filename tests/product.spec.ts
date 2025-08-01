@@ -10,7 +10,7 @@ describe("Product Routes", ()=>{
 
     beforeEach(async () => {
         await connection.dropDatabase()
-        await connection.synchronize()
+        await connection.synchronize(true)
     })
 
     afterAll(async () => {
@@ -72,7 +72,16 @@ describe("Product Routes", ()=>{
     })
     describe('GET /product',()=>{
       describe("Given all fields", ()=>{
-    
+      it("Should return all products", async()=>{
+
+        await request(app).post('/product').send({ name: "codebite1", description: "ed tech1" });
+        await request(app).post('/product').send({ name: "codebite2", description: "ed tech2" });
+         await request(app).post('/product').send({ name: "codebite3", description: "ed tech3" });
+
+           const response = await request(app).get("/product")
+           console.log(response.body.allProducts)
+           expect(response.body.allProducts).toHaveLength(3)  
+      })
       })
     })
 })
