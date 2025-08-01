@@ -12,15 +12,14 @@ export const createProduct = async (
     try {
         const productRepository = AppDataSource.getRepository(Product)
         const productData = req.body
-        const id = Number(req.body.id)
 
         const errors = validationResult(req)
         if(!errors.isEmpty()){
             return res.status(400).json({errors: errors.array()})
         }
         
-        await productRepository.save(productData)
-        return res.status(201).json({ message: 'product created with this id', id})
+       const savedProduct = await productRepository.save(productData)
+        return res.status(201).json({ message: 'product created with this id', id: savedProduct.id})
     } catch (err) {
         next(err)
         return
@@ -38,14 +37,14 @@ export const getProductById = async (
             res.status(400).json({ message: 'invalid product id' })
         }
         const productRepository = AppDataSource.getRepository(Product)
-        const product = await productRepository.findBy({ id })
+        const product = await productRepository.findOneBy({ id })
 
         if (!product) {
             return res
                 .status(401)
                 .json({ message: `No product found with this id ${id}` })
         }
-        return res.status(201).json(product)
+        return res.status(200).json({ message: "Product found", product })
     } catch (err) {
         next(err)
         return

@@ -17,34 +17,25 @@ describe("Product Routes", ()=>{
         await connection.destroy()
     })
     describe('POST /product', () => {
-    describe('given all fields', () => {
-        it("should give all the fields", async()=>{
-           const productData = {
+          const productData = {
             name: "codebite",
             description: "ed tech"
            }
+    describe('given all fields', () => {
+        it("should retrun 201 statusCode", async()=>{
+
            const response = await request(app).post('/product').send(productData)
     
            expect(response.statusCode).toBe(201)
         })
          it("should return return valid json", async()=>{
-             const productData = {
-            name: "mac book",
-            description: "The mac book"
-           }
            const response = await request(app).post('/product').send(productData)
     
            expect((response.headers as Record<string, string>)['content-type'], 
         ).toEqual(expect.stringContaining('json'))
         })
-        it('should return the id of the created user', async()=>{
-             const productData = {
-            id: 1,
-            name: "macbook",
-            description: "The mac book"
-           }
+        it('should return the id of the created product', async()=>{
            const response = await request(app).post('/product').send(productData)
-            console.log(response.body)
            expect(response.body).toHaveProperty('id')
              expect(response.statusCode).toBe(201);
     
@@ -52,20 +43,20 @@ describe("Product Routes", ()=>{
     })
     describe('Fields are missing', () => {
         it("should return 400 if name field is missing", async()=>{
-             const productData = {
+             const productData1 = {
             name: "",
             description: "ed tech"
            }
-           const response = await request(app).post('/product').send(productData)
+           const response = await request(app).post('/product').send(productData1)
     
            expect(response.statusCode).toBe(400)
         })
         it("should return 400 if description field is missing", async()=>{
-             const productData = {
+             const productData2 = {
             name: "mac book",
-            description: ""
+            description: "" 
            }
-           const response = await request(app).post('/product').send(productData)
+           const response = await request(app).post('/product').send(productData2)
            expect(response.statusCode).toBe(400)
         })
     })
@@ -79,8 +70,19 @@ describe("Product Routes", ()=>{
          await request(app).post('/product').send({ name: "codebite3", description: "ed tech3" });
 
            const response = await request(app).get("/product")
-           console.log(response.body.allProducts)
            expect(response.body.allProducts).toHaveLength(3)  
+      })
+      it("Should return 200 statusCode", async()=>{
+
+        const product =  await request(app).post('/product').send({ name: "codebite3", description: "ed tech3" });
+          const productId = product.body.id
+           const response = await request(app).get(`/product/${productId}`)
+           expect(response.statusCode).toBe(200) 
+      })
+      it("should return the array if there is no products", async()=>{
+         const response = await request(app).get('/product')
+    
+        expect(response.body.allProducts).toEqual([])
       })
       })
     })
