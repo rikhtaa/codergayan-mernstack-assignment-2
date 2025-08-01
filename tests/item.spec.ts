@@ -18,35 +18,36 @@ describe("Item Routes", ()=>{
         await connection.destroy()
     })
     describe('POST /item', () => {
-    describe('given all fields', () => {
-        it("should retrun 201 statusCode", async()=>{
-
-        await request(app).post('/product').send({ name: "codebite1", description: "ed tech1" });
-        const itemData = {
+         const itemData = {
             price: 400,
             productId: 1 
             }
+        const productData = { 
+            name: "codebite1", 
+            description: "ed tech1" 
+        }
+    describe('given all fields', () => {
+        it("should retrun 201 statusCode", async()=>{
+
+        await request(app).post('/product').send(productData);
+       
         const response = await request(app).post('/item').send(itemData)
         expect(response.statusCode).toBe(201)
         })
         it("should return return valid json", async()=>{
-            const itemData = {
-                price: 400,
-                productId: 1 
-                }
            const response = await request(app).post('/item').send(itemData)
                    
             expect((response.headers as Record<string, string>)['content-type'], 
                        ).toEqual(expect.stringContaining('json'))
         })
          it('should return the id of the created item', async()=>{
-                const productResponse = await request(app).post('/product').send({ name: "codebite001", description: "codebite001" });
+                const productResponse = await request(app).post('/product').send(productData);
                     const productId = productResponse.body.id
-                     const itemData = {
+                     const itemData1 = {
                     price: 400,
                     productId, 
                    }
-                   const response = await request(app).post('/item').send(itemData)
+                   const response = await request(app).post('/item').send(itemData1)
                    expect(response.body.item).toHaveProperty('id')
                      expect(response.statusCode).toBe(201);
             
@@ -73,7 +74,7 @@ describe("Item Routes", ()=>{
     describe('GET /item', ()=>{
        describe("Given all fields", ()=>{
             it("Should return all items", async()=>{
-              const productResponse = await request(app).post('/product').send({ name: "codebite001", description: "codebite001" });
+              const productResponse = await request(app).post('/product').send(productData);
               const productId = productResponse.body.id 
       
               await request(app).post('/item').send({ price: 200, productId }); 
@@ -83,6 +84,21 @@ describe("Item Routes", ()=>{
                const response = await request(app).get("/item")
                  expect(response.body.allItems).toHaveLength(3)  
             })
+             it("Should return 200 statusCode", async()=>{
+            const productResponse = await request(app).post('/product').send(productData);
+            const productId = productResponse.body.id
+
+            await request(app).post('/item').send({ price: 400, productId });
+            
+            const response = await request(app).get(`/item/${productId}`)
+            console.log(response.status)
+            expect(response.statusCode).toBe(200) 
+            })
+            it("should return the array if there is no items", async()=>{
+                     const response = await request(app).get('/item')
+                
+                    expect(response.body.allItems).toEqual([])
+                  })
        })
     })
 })
