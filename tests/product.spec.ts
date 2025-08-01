@@ -43,6 +43,16 @@ describe('give all fields', () => {
        const response = await request(app).post('/product').send(productData)
        expect(response.statusCode).toBe(400)
     })
+    it("should return return valid json", async()=>{
+         const productData = {
+        name: "mac book",
+        description: "The mac book"
+       }
+       const response = await request(app).post('/product').send(productData)
+
+       expect((response.headers as Record<string, string>)['content-type'], 
+    ).toEqual(expect.stringContaining('json'))
+    })
 
 })
 })
