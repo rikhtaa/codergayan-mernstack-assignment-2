@@ -53,7 +53,7 @@ export const getItemById = async (
                 .status(401)
                 .json({ message: `No item found with this id ${id}` })
         }
-        return res.status(201).json(item)
+        return res.status(200).json(item)
     } catch (err) {
         next(err)
         return
