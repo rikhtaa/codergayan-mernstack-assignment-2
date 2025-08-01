@@ -61,6 +61,14 @@ describe("Item Routes", ()=>{
           
                  expect(response.statusCode).toBe(400)
         })
+      it("should return 400 if productId field is missing", async()=>{
+            const itemData = {
+            price: 200
+            }
+                 const response = await request(app).post('/item').send(itemData)
+          
+                 expect(response.statusCode).toBe(400)
+        })
     })
 })
 })
