@@ -4,3 +4,5 @@ build
 coverage
 tsconfig.json
 eslint.config.mjs
+package.json
+package-lock.json
