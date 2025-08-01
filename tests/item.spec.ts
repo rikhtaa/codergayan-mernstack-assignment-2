@@ -17,7 +17,7 @@ describe("Item Routes", ()=>{
     afterAll(async () => {
         await connection.destroy()
     })
-    describe('POST /Item', () => {
+    describe('POST /item', () => {
     describe('given all fields', () => {
         it("should retrun 201 statusCode", async()=>{
 
@@ -69,6 +69,21 @@ describe("Item Routes", ()=>{
           
                  expect(response.statusCode).toBe(400)
         })
+    })
+    describe('GET /item', ()=>{
+       describe("Given all fields", ()=>{
+            it("Should return all items", async()=>{
+              const productResponse = await request(app).post('/product').send({ name: "codebite001", description: "codebite001" });
+              const productId = productResponse.body.id 
+      
+              await request(app).post('/item').send({ price: 200, productId }); 
+              await request(app).post('/item').send({ price: 300, productId });
+               await request(app).post('/item').send({ price: 400, productId });
+               
+               const response = await request(app).get("/item")
+                 expect(response.body.allItems).toHaveLength(3)  
+            })
+       })
     })
 })
 })
