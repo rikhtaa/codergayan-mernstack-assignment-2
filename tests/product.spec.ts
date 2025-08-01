@@ -74,9 +74,9 @@ describe("Product Routes", ()=>{
       })
       it("Should return 200 statusCode", async()=>{
 
-         await request(app).post('/product').send({ name: "codebite3", description: "ed tech3" });
-
-           const response = await request(app).get("/product")
+        const product =  await request(app).post('/product').send({ name: "codebite3", description: "ed tech3" });
+          const productId = product.body.id
+           const response = await request(app).get(`/product/${productId}`)
            expect(response.statusCode).toBe(200) 
       })
       it("should return the array if there is no products", async()=>{
