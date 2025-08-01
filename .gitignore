@@ -3,3 +3,4 @@ dist
 .env.test
 .env.dev
 coverage
+logs
