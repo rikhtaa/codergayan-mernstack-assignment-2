@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { AppDataSource } from '../config/Data_Source'
 import { productData } from '../types'
 import { Product } from '../entity/Product'
+import { validationResult } from 'express-validator'
 
 export const createProduct = async (
     req: Request<object, object, productData>,
@@ -11,6 +12,12 @@ export const createProduct = async (
     try {
         const productRepository = AppDataSource.getRepository(Product)
         const productData = req.body
+
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            return res.status(400).json({errors: errors.array()})
+        }
+        
         await productRepository.save(productData)
         return res.status(201).json({ message: 'product created' })
     } catch (err) {
