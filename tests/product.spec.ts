@@ -53,6 +53,17 @@ describe('give all fields', () => {
        expect((response.headers as Record<string, string>)['content-type'], 
     ).toEqual(expect.stringContaining('json'))
     })
+    it('should return the id of the created user', async()=>{
+         const productData = {
+        id: 1,
+        name: "macbook",
+        description: "The mac book"
+       }
+       const response = await request(app).post('/product').send(productData)
+        console.log(response.body)
+       expect(response.body).toHaveProperty('id')
+         expect(response.statusCode).toBe(201);
 
+    })
 })
 })

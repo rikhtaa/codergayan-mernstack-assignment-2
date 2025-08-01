@@ -12,6 +12,7 @@ export const createProduct = async (
     try {
         const productRepository = AppDataSource.getRepository(Product)
         const productData = req.body
+        const id = Number(req.body.id)
 
         const errors = validationResult(req)
         if(!errors.isEmpty()){
@@ -19,7 +20,7 @@ export const createProduct = async (
         }
         
         await productRepository.save(productData)
-        return res.status(201).json({ message: 'product created' })
+        return res.status(201).json({ message: 'product created with this id', id})
     } catch (err) {
         next(err)
         return
