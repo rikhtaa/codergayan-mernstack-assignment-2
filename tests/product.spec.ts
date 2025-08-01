@@ -37,7 +37,7 @@ describe("Product Routes", ()=>{
            expect((response.headers as Record<string, string>)['content-type'], 
         ).toEqual(expect.stringContaining('json'))
         })
-        it('should return the id of the created user', async()=>{
+        it('should return the id of the created product', async()=>{
              const productData = {
             id: 1,
             name: "macbook",
