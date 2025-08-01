@@ -40,7 +40,7 @@ describe("Item Routes", ()=>{
                        ).toEqual(expect.stringContaining('json'))
         })
          it('should return the id of the created item', async()=>{
-                const productResponse = await request(app).post('/product').send({ name: "codebite1", description: "ed tech1" });
+                const productResponse = await request(app).post('/product').send({ name: "codebite001", description: "codebite001" });
                     const productId = productResponse.body.id
                      const itemData = {
                     price: 400,
@@ -50,7 +50,17 @@ describe("Item Routes", ()=>{
                    expect(response.body.item).toHaveProperty('id')
                      expect(response.statusCode).toBe(201);
             
-                })
+        })
+    })
+     describe('Fields are missing', () => {
+      it("should return 400 if price field is missing", async()=>{
+            const itemData = {
+            productId: 1 
+            }
+                 const response = await request(app).post('/item').send(itemData)
+          
+                 expect(response.statusCode).toBe(400)
+        })
     })
 })
 })
