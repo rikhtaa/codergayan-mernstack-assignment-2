@@ -10,7 +10,7 @@ export default tseslint.config({
     
   ],
   ignores: ['dist', 'node_modules', '.prettierrc', 'jest.config.js',  'tests/',
-            'coverage/',],
+            'coverage/',  'github',],
   files: ['**/*.ts'],
   languageOptions: {
     parserOptions: {
