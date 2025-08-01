@@ -26,5 +26,15 @@ describe('give all fields', () => {
 
        expect(response.statusCode).toBe(201)
     })
+    it("should return 400 if name field is missing", async()=>{
+         const productData = {
+        name: "",
+        description: "ed tech"
+       }
+       const response = await request(app).post('/product').send(productData)
+
+       expect(response.statusCode).toBe(400)
+    })
+    
 })
 })
