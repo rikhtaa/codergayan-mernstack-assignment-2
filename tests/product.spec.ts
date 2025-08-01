@@ -44,7 +44,6 @@ describe("Product Routes", ()=>{
             description: "The mac book"
            }
            const response = await request(app).post('/product').send(productData)
-            console.log(response.body)
            expect(response.body).toHaveProperty('id')
              expect(response.statusCode).toBe(201);
     
