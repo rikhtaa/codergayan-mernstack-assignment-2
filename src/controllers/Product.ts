@@ -44,7 +44,7 @@ export const getProductById = async (
                 .status(401)
                 .json({ message: `No product found with this id ${id}` })
         }
-        return res.status(201).json({ message: "Product found", product })
+        return res.status(200).json({ message: "Product found", product })
     } catch (err) {
         next(err)
         return
