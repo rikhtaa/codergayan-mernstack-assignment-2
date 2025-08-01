@@ -79,8 +79,14 @@ describe("Product Routes", ()=>{
          await request(app).post('/product').send({ name: "codebite3", description: "ed tech3" });
 
            const response = await request(app).get("/product")
-           console.log(response.body.allProducts)
            expect(response.body.allProducts).toHaveLength(3)  
+      })
+      it("Should return 200 statusCode", async()=>{
+
+         await request(app).post('/product').send({ name: "codebite3", description: "ed tech3" });
+
+           const response = await request(app).get("/product")
+           expect(response.statusCode).toBe(200) 
       })
       })
     })
