@@ -3,6 +3,7 @@ import { AppDataSource } from '../config/Data_Source'
 import { Item } from '../entity/Item'
 import { itemData } from '../types'
 import { Product } from '../entity/Product'
+import { validationResult } from 'express-validator'
 export const createItem = async (
     req: Request<object, object, itemData>,
     res: Response,
@@ -10,6 +11,11 @@ export const createItem = async (
 ) => {
     try {
         const { price, productId } = req.body
+
+         const errors = validationResult(req)
+                if(!errors.isEmpty()){
+                    return res.status(400).json({errors: errors.array()})
+                }
         const productRepository = AppDataSource.getRepository(Product)
         const product = await productRepository.findOneBy({ id: productId })
 
