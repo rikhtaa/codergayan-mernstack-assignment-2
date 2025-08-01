@@ -20,6 +20,5 @@ const logger = winston.createLogger({
         }),
     ],
 })
-console.log('logger')
 
 export default logger
