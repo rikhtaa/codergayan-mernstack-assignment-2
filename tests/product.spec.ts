@@ -18,7 +18,7 @@ describe("Product Routes", ()=>{
     })
     describe('POST /product', () => {
     describe('given all fields', () => {
-        it("should give all the fields", async()=>{
+        it("should retrun 201 statusCode", async()=>{
            const productData = {
             name: "codebite",
             description: "ed tech"
