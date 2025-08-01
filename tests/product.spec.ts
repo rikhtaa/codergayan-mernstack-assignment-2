@@ -88,6 +88,13 @@ describe("Product Routes", ()=>{
            const response = await request(app).get("/product")
            expect(response.statusCode).toBe(200) 
       })
+      it("should return the array if there is no products", async()=>{
+        const productData = []!
+        await request(app).post('/product').send(productData)
+         const response = await request(app).get('/product')
+    
+        expect(response.body.allProducts).toEqual([])
+      })
       })
     })
 })
