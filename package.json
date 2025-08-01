@@ -1,54 +1,60 @@
 {
-    "name": "practice-mernstack",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "dev": "nodemon --exec ts-node src/server.ts",
-        "lint": "eslint .",
-        "lint:check": "eslint .",
-        "lint:fix": "eslint . --fix",
-        "format:fix": "prettier . --write",
-        "format:check": "prettier . --check",
-        "migration:generate": "typeorm-ts-node-commonjs migration:generate",
-        "migration:run": "typeorm-ts-node-commonjs migration:run",
-        "migration:create": "typeorm-ts-node-commonjs migration:create",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "prepare": "husky"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "lint-staged": {
-        "*.ts": [
-            "npm run format:fix",
-            "npm run lint:fix"
-        ]
-    },
-    "dependencies": {
-        "@types/node": "^24.1.0",
-        "bcryptjs": "^3.0.2",
-        "dotenv": "^17.2.1",
-        "express": "^5.1.0",
-        "latest": "^0.2.0",
-        "pg": "^8.16.3",
-        "reflect-metadata": "^0.2.2",
-        "typeorm": "^0.3.25",
-        "winston": "^3.17.0"
-    },
-    "devDependencies": {
-        "@types/express": "^5.0.3",
-        "@types/winston": "^2.4.4",
-        "@typescript-eslint/eslint-plugin": "^8.38.0",
-        "@typescript-eslint/parser": "^8.38.0",
-        "eslint": "^9.32.0",
-        "http-errors": "^2.0.0",
-        "husky": "^9.1.7",
-        "lint-staged": "^16.1.2",
-        "nodemon": "^3.1.10",
-        "prettier": "^3.6.2",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.8.3",
-        "typescript-eslint": "^8.38.0"
-    }
+  "name": "practice-mernstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "lint": "eslint .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:fix": "prettier . --write",
+    "format:check": "prettier . --check",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate",
+    "migration:run": "typeorm-ts-node-commonjs migration:run",
+    "migration:create": "typeorm-ts-node-commonjs migration:create",
+    "test": "jest --watch --runInBand",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "lint-staged": {
+    "*.ts": [
+      "npm run format:fix",
+      "npm run lint:fix"
+    ]
+  },
+  "dependencies": {
+    "@types/node": "^24.1.0",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "latest": "^0.2.0",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.25"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^9.32.0",
+    "http-errors": "^2.0.0",
+    "husky": "^9.1.7",
+    "jest": "^30.0.5",
+    "lint-staged": "^16.1.2",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.38.0",
+    "winston": "^3.17.0"
+  }
 }
