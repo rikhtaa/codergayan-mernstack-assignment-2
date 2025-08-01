@@ -35,6 +35,14 @@ describe('give all fields', () => {
 
        expect(response.statusCode).toBe(400)
     })
-    
+    it("should return 400 if description field is missing", async()=>{
+         const productData = {
+        name: "mac book",
+        description: ""
+       }
+       const response = await request(app).post('/product').send(productData)
+       expect(response.statusCode).toBe(400)
+    })
+
 })
 })
