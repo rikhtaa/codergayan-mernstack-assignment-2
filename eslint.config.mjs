@@ -9,11 +9,12 @@ export default tseslint.config({
     tseslint.configs.recommendedTypeChecked,
     
   ],
-  ignores: ['dist', 'node_modules', '.prettierrc', 'jest.config.js',  'tests/',
+  ignores: ['dist', 'node_modules', '.prettierrc', 'jest.config.js',
             'coverage/',  'github',],
   files: ['**/*.ts'],
   languageOptions: {
     parserOptions: {
+      project: './tsconfig.json',
       tsconfigRootDir: import.meta.dirname,
     },
   },
