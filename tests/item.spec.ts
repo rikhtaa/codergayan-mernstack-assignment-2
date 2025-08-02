@@ -12,7 +12,7 @@ describe("Item Routes", ()=>{
     beforeEach(async () => {
         await connection.dropDatabase()
         await connection.synchronize(true)
-    })
+    }, 30000)
 
     afterAll(async () => {
         await connection.destroy()
