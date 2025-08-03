@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm'
 import { AppDataSource } from '../src/config/Data_Source'
-import { app } from '../src/server'
+import { app, stopServer } from '../src/server'
 import request from 'supertest'
 
 describe("Item Routes", ()=>{
@@ -16,6 +16,7 @@ describe("Item Routes", ()=>{
 
     afterAll(async () => {
         await connection.destroy()
+        stopServer() 
     })
     describe('POST /item', () => {
          const itemData = {
@@ -91,7 +92,6 @@ describe("Item Routes", ()=>{
             await request(app).post('/item').send({ price: 400, productId });
             
             const response = await request(app).get(`/item/${productId}`)
-            console.log(response.status)
             expect(response.statusCode).toBe(200) 
             })
             it("should return the array if there is no items", async()=>{
