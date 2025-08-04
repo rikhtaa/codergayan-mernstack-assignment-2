@@ -30,9 +30,6 @@ jobs:
           DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
           DB_NAME: ${{ secrets.TEST_DB_NAME }}
-          REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
-          JWKS_URI: ${{ secrets.JWKS_URI }}
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
       - name: Build-test
         run: npm run build
@@ -48,7 +45,7 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: rekhta23/mernstack_auth_service
+      IMAGE_NAME: ekhta23/codergayan-mernstack-assignment-2
       IMAGE_TAG: build-${{ github.run_number }}
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
