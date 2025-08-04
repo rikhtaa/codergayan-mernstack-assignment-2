@@ -5,6 +5,8 @@ import { productRouter } from './routes/product'
 import { itemRouter } from './routes/item'
 import { Config } from './config'
 export const app = express()
+let server: ReturnType<typeof app.listen> | null = null
+
 
 app.use(express.json())
 
@@ -15,9 +17,10 @@ const startServer = async () => {
     try {
         await AppDataSource.initialize()
         logger.info('DB connected successfully')
-        app.listen(PORT, () => {
+         server  = app.listen(PORT, () => {
             logger.info(`Server started on ${PORT} successfully`)
         })
+        return server
     } catch (error: unknown) {
         if (error instanceof Error) {
             logger.error(error.message)
@@ -27,4 +30,12 @@ const startServer = async () => {
         }
     }
 }
-void startServer()
+export const stopServer = () => {
+    if (server) {
+        server.close()
+    }
+}
+
+if (process.env.NODE_ENV !== 'test') {
+  void startServer()
+}

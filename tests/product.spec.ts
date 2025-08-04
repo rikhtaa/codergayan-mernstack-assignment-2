@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm'
-import { app } from '../src/server'
+import { app, stopServer } from '../src/server'
 import request from 'supertest'
 import { AppDataSource } from '../src/config/Data_Source'
 describe("Product Routes", ()=>{
@@ -11,10 +11,11 @@ describe("Product Routes", ()=>{
     beforeEach(async () => {
         await connection.dropDatabase()
         await connection.synchronize(true)
-    })
+    }, 30000)
 
     afterAll(async () => {
         await connection.destroy()
+        stopServer() 
     })
     describe('POST /product', () => {
           const productData = {
