@@ -1,7 +1,7 @@
 import winston from 'winston'
 const logger = winston.createLogger({
     level: 'info',
-    defaultMeta: { service: 'auth-service' },
+    defaultMeta: { service: 'assignment 2' },
     transports: [
         new winston.transports.File({
             level: 'error',
